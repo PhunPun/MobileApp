@@ -4,12 +4,14 @@ import {
     Text 
     } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { colors } from "../constants";
 function WelcomeButton(props) {
+  const {onPress, title, isSelected} = props
   return (
     <TouchableOpacity
-        onPress={props.onPress}
+        onPress={onPress}
       style={{
-        borderBlockColor: 'white',
+        borderColor: isSelected == true? colors.primary : "white",
         borderWidth: 1,
         height: 40,
         borderRadius: 10,
@@ -17,24 +19,27 @@ function WelcomeButton(props) {
         marginVertical: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: isSelected == true?'white':null,
       }}>
-      <Icon
+      {isSelected == true && <Icon
         name="check-circle"
         style={{
-          color: 'green',
+          color: colors.primary,
           position: 'absolute',
           left: 10,
           fontSize: 18,
         }}
-      />
+      />}
       <Text
         style={{
           fontSize: 18,
-          color: '#ED6263',
+          color: isSelected == true? colors.primary: 'white',
           fontWeight: '500',
+          textShadowColor: isSelected == true? 'white': 'black',
+          textShadowOffset: {width: 1, height: 1},
+          textShadowRadius: 2
         }}>
-        {props.title}
+        {title}
       </Text>
     </TouchableOpacity>
   );
