@@ -11,7 +11,7 @@ export const isValidEmail = (stringEmail) => {
 //validate Password
 export const isValidPassword = (stringPassword) => {
   let regex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{6,10}$/;
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{6,15}$/;
 
   return (stringPassword, regex.test(stringPassword));
 };

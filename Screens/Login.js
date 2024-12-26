@@ -8,6 +8,7 @@ import {
   StatusBar,
   Alert,
   TextInput,
+  TurboModuleRegistry,
 } from 'react-native';
 import {images, icons, colors, fontSizes} from '../constants';
 import {WelcomeButton} from '../components';
@@ -17,7 +18,11 @@ function Login(props) {
   const [errorEmail, setErrorEmail] = useState('')
   const [errorPassword, setErrorPassword] = useState('')
   const [email, setEmail] = useState('')
-  const [Password, setPassword] = useState('')
+  const [password, setPassword] = useState('')
+  const isValidationOK = ()=>
+    email.length > 0 && password.length > 0
+    && isValidEmail(email) == true
+    && isValidPassword(password) == true
   return (
     <View
       style={{
@@ -85,8 +90,7 @@ function Login(props) {
             }}></TextInput>
           <Text style={{
             color: 'red',
-            marginTop: 10,
-            marginLeft: 15,
+            marginTop: 5,
             fontSize: fontSizes.s6,
           }}>
             {errorEmail}
@@ -107,20 +111,20 @@ function Login(props) {
               if(isValidPassword(password) == true){
                 setErrorPassword('')
               }else{
-                if (!/[A-Z]/.test(password)) {
-                  setErrorPassword ('Password must contain at least one uppercase letter.');
-                }
-                if (!/[a-z]/.test(password)) {
-                  setErrorPassword ('Password must contain at least one lowercase letter.');
-                }
-                if (!/\d/.test(password)) {
-                  setErrorPassword ('Password must contain at least one number.');
+                if (password.length < 6 || password.length > 15) {
+                  setErrorPassword('Password must be 6 to 15 characters long.') ;
                 }
                 if (!/[@.#$!%*?&]/.test(password)) {
                   setErrorPassword ('Password must contain at least one special character (@.#$!%*?&).');
                 }
-                if (password.length < 6 || password.length > 10) {
-                  setErrorPassword('Password must be 6 to 10 characters long.') ;
+                if (!/\d/.test(password)) {
+                  setErrorPassword ('Password must contain at least one number.');
+                }
+                if (!/[a-z]/.test(password)) {
+                  setErrorPassword ('Password must contain at least one lowercase letter.');
+                }
+                if (!/[A-Z]/.test(password)) {
+                  setErrorPassword ('Password must contain at least one uppercase letter.');
                 }
               }
               setPassword(password)
@@ -135,8 +139,7 @@ function Login(props) {
             }}></TextInput>
           <Text style={{
             color: 'red',
-            marginTop: 10,
-            marginLeft: 15,
+            marginTop: 5,
             fontSize: fontSizes.s6,
           }}>
             {errorPassword}
@@ -151,11 +154,12 @@ function Login(props) {
           alignItems: 'center',
         }}>
         <TouchableOpacity
+          disabled = {isValidationOK() == false}
           onPress={() => {
-            alert(`email = ${email}, password = ${Password}`);
+            alert(`email = ${email}, password = ${password}`);
           }}
           style={{
-            backgroundColor: colors.primary,
+            backgroundColor: isValidationOK() == false? colors.placeHoder : colors.primary,
             width: 230,
             height: 45,
             borderRadius: 15,
