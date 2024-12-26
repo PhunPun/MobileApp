@@ -12,8 +12,12 @@ import {
 import {images, icons, colors, fontSizes} from '../constants';
 import {WelcomeButton} from '../components';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import { isValidEmail,isValidPassword } from '../utilies/Validations';
 function Login(props) {
+  const [errorEmail, setErrorEmail] = useState('')
+  const [errorPassword, setErrorPassword] = useState('')
+  const [email, setEmail] = useState('')
+  const [Password, setPassword] = useState('')
   return (
     <View
       style={{
@@ -53,8 +57,8 @@ function Login(props) {
         />
       </View>
       <View style={{
-        marginTop: 50
-      }}>
+        marginTop: 10
+        }}>
         <View
           style={{
             marginHorizontal: 15,
@@ -66,6 +70,12 @@ function Login(props) {
             Email
           </Text>
           <TextInput
+            onChangeText={(email)=>{
+              setErrorEmail(
+                isValidEmail(email) == true ? 
+                  '' : 'Email not in correct format')
+              setEmail(email)
+            }}  
             placeholder="example@gmail.com"
             placeholderTextColor={colors.placeHoder}
             style={{
@@ -73,6 +83,14 @@ function Login(props) {
               borderBottomColor: colors.placeHoder,
               borderBottomWidth: 2,
             }}></TextInput>
+          <Text style={{
+            color: 'red',
+            marginTop: 10,
+            marginLeft: 15,
+            fontSize: fontSizes.s6,
+          }}>
+            {errorEmail}
+          </Text>
         </View>
         <View
           style={{
@@ -85,6 +103,28 @@ function Login(props) {
             Password
           </Text>
           <TextInput
+            onChangeText={(password)=> {
+              if(isValidPassword(password) == true){
+                setErrorPassword('')
+              }else{
+                if (!/[A-Z]/.test(password)) {
+                  setErrorPassword ('Password must contain at least one uppercase letter.');
+                }
+                if (!/[a-z]/.test(password)) {
+                  setErrorPassword ('Password must contain at least one lowercase letter.');
+                }
+                if (!/\d/.test(password)) {
+                  setErrorPassword ('Password must contain at least one number.');
+                }
+                if (!/[@.#$!%*?&]/.test(password)) {
+                  setErrorPassword ('Password must contain at least one special character (@.#$!%*?&).');
+                }
+                if (password.length < 6 || password.length > 10) {
+                  setErrorPassword('Password must be 6 to 10 characters long.') ;
+                }
+              }
+              setPassword(password)
+            }}
             secureTextEntry={true}
             placeholder="Enter your password"
             placeholderTextColor={colors.placeHoder}
@@ -93,7 +133,16 @@ function Login(props) {
               borderBottomColor: colors.placeHoder,
               borderBottomWidth: 2,
             }}></TextInput>
+          <Text style={{
+            color: 'red',
+            marginTop: 10,
+            marginLeft: 15,
+            fontSize: fontSizes.s6,
+          }}>
+            {errorPassword}
+          </Text>
         </View>
+        
       </View>
       <View
         style={{
@@ -103,7 +152,7 @@ function Login(props) {
         }}>
         <TouchableOpacity
           onPress={() => {
-            alert('Login');
+            alert(`email = ${email}, password = ${Password}`);
           }}
           style={{
             backgroundColor: colors.primary,
