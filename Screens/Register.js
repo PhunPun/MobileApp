@@ -30,9 +30,14 @@ function Register(props){
     const [confirm, setConfirm] = useState('')
     const [username, setUsername] = useState('')
     const isValidationOK = ()=>
-        email.length > 0 && password.length > 0
+        email.length > 0 
+        && password.length > 0
+        && username.length > 0
+        && confirm.length > 0
         && isValidEmail(email) == true
         && isValidPassword(password) == true
+        && isValidConfirm(password,confirm) == true
+        && isValidUsername(username) == true
       return (
         <View
           style={{
