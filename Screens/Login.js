@@ -50,7 +50,7 @@ function Login(props) {
             width: '45%',
             marginLeft: '5%',
           }}>
-          Already have an Account?
+          Welcome Back!
         </Text>
         <Image
           source={images.loginImage}
