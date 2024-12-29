@@ -10,6 +10,7 @@ import {
   TextInput,
   TurboModuleRegistry,
   ScrollView,
+  FlatList
 } from 'react-native';
 import {images, icons, colors, fontSizes} from '../../constants';
 import {WelcomeButton} from '../../components';
@@ -80,11 +81,20 @@ function FoodList(props) {
         <View style={{
             marginTop: 30,
         }}>
-            <ScrollView>
+            {/* <ScrollView>
                 {foods.map(eachFood => 
                     <FoodItem food = {eachFood}
                     key={eachFood.name}/>)}
-            </ScrollView>
+            </ScrollView> */}
+            <FlatList
+                data={foods}
+                renderItem={({item}) => <FoodItem 
+                    onPress ={() => {
+                        alert(item.name)
+                    }}
+                    food = {item} key={item.name}/>}
+                keyExtractor={eachFood => eachFood.name}
+            />
         </View>
       </View>
     );

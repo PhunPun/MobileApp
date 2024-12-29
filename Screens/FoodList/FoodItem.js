@@ -29,7 +29,13 @@ function _getColorFromStatus(start){
     return colors.success
 }
 function FoodItem(props) {
-    let {name, status, price, url} = props.food
+    let {
+        name, 
+        status, 
+        price, 
+        url,
+    } = props.food
+    const {onPress} = props
     const VND = new Intl.NumberFormat('vi-VN', {
         style: 'currency',
         currency: 'VND',
@@ -169,15 +175,16 @@ function FoodItem(props) {
             </Text>
           </TouchableOpacity> */}
           <TouchableOpacity
+            onPress = {onPress}
             style={{
               marginLeft: 20,
               borderWidth: 0.2,
               borderColor: colors.text,
               paddingHorizontal: 80,
-              paddingVertical: 5,
+              paddingVertical: 8,
               borderRadius: 5,
               alignSelf: 'center',
-              backgroundColor: colors.placeHoder
+              backgroundColor: colors.placeHoder,
             }}>
             <Text>Add cart</Text>
           </TouchableOpacity>
