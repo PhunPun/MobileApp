@@ -67,6 +67,8 @@ function FoodList(props) {
             url: 'https://i.pinimg.com/736x/73/ed/94/73ed9464b233e06a428c7cad74fa5af8.jpg'
         },
     ])
+    const [searchText, setSearchText] = useState('')
+    const fillteredFoods = () => foods.filter(eachFood => eachFood.name.toLowerCase().includes(searchText.toLowerCase()))
     return (
       <View
         style={{
@@ -78,23 +80,76 @@ function FoodList(props) {
           backgroundColor="transparent"
           barStyle="dark-content"
         />
+        <View style={{height: 35}}></View>
+        <View
+          style={{
+            height: 60,
+            marginHorizontal: 20,
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}>
+          <Icon
+            name="search"
+            size={15}
+            color={colors.text}
+            style={{
+              position: 'absolute',
+              left: 10,
+            }}
+          />
+          <TextInput
+            autoCorrect={false}
+            onChangeText={text => {
+              setSearchText(text);
+            }}
+            style={{
+              backgroundColor: colors.textInput,
+              height: 40,
+              flex: 1,
+              marginRight: 10,
+              borderRadius: 8,
+              paddingStart: 35,
+            }}></TextInput>
+          <Icon name="bars" size={30} color={colors.text} />
+        </View>
         <View style={{
-            marginTop: 30,
+            height: '100%'
         }}>
-            {/* <ScrollView>
+          {/* <ScrollView>
                 {foods.map(eachFood => 
                     <FoodItem food = {eachFood}
                     key={eachFood.name}/>)}
             </ScrollView> */}
-            <FlatList
-                data={foods}
-                renderItem={({item}) => <FoodItem 
-                    onPress ={() => {
-                        alert(item.name)
-                    }}
-                    food = {item} key={item.name}/>}
-                keyExtractor={eachFood => eachFood.name}
-            />
+        {fillteredFoods().length > 0 ? (
+          <FlatList
+            data={fillteredFoods()}
+            renderItem={({item}) => (
+              <FoodItem
+                onPress={() => {
+                  alert(item.name);
+                }}
+                food={item}
+                key={item.name}
+              />
+            )}
+            keyExtractor={eachFood => eachFood.name}
+          />
+        ) : (
+          <View
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text
+              style={{
+                color: colors.primary,
+                fontSize: fontSizes.s2,
+              }}>
+              No food found
+            </Text>
+          </View>
+        )}
         </View>
       </View>
     );

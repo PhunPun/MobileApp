@@ -4,5 +4,6 @@ export default {
     success: 'rgb(54, 221, 110)',
     warning: 'rgb(223, 165, 8)',
     alert: 'rgb(221, 54, 54)',
-    text: 'black'
+    text: 'black',
+    textInput:  'rgba(97, 95, 95, 0.16)',
 }
