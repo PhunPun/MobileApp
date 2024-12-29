@@ -44,7 +44,7 @@ function Login(props) {
         }}>
         <Text
           style={{
-            color: 'black',
+            color: colors.text,
             fontSize: fontSizes.s1,
             fontWeight: 'bold',
             width: '45%',
@@ -205,7 +205,7 @@ function Login(props) {
           <View
             style={{
               height: 1,
-              backgroundColor: 'black',
+              backgroundColor: colors.text,
               flex: 1,
             }}></View>
           <Text
@@ -218,7 +218,7 @@ function Login(props) {
           <View
             style={{
               height: 1,
-              backgroundColor: 'black',
+              backgroundColor: colors.text,
               flex: 1,
             }}></View>
         </View>

@@ -51,34 +51,33 @@ function Register(props){
           />
           <View
             style={{
-              height: 200,
+              height: 150,
               flexDirection: 'row',
-              marginTop: 50,
+              marginTop: 20,
               alignItems: 'center',
               justifyContent: 'space-around',
             }}>
             <Text
               style={{
-                color: 'black',
+                color: colors.text,
                 fontSize: fontSizes.s1,
                 fontWeight: 'bold',
                 width: '45%',
                 marginLeft: '5%',
               }}>
-              Already have an Account?
+              Create Account?
             </Text>
             <Image
-              source={images.loginImage}
+              source={images.registerImage}
               style={{
-                height: 200,
+                height: 130,
                 width: '45%',
                 marginRight: '5%',
+                marginTop: 50
               }}
             />
           </View>
-          <View style={{
-            marginTop: 10
-            }}>
+          <View style={{}}>
             <View
               style={{
                 marginHorizontal: 15,
@@ -90,24 +89,27 @@ function Register(props){
                 Email
               </Text>
               <TextInput
-                onChangeText={(email)=>{
+                onChangeText={email => {
                   setErrorEmail(
-                    isValidEmail(email) == true ? 
-                      '' : 'Email not in correct format')
-                  setEmail(email)
-                }}  
+                    isValidEmail(email) == true
+                      ? ''
+                      : 'Email not in correct format',
+                  );
+                  setEmail(email);
+                }}
                 placeholder="example@gmail.com"
                 placeholderTextColor={colors.placeHoder}
                 style={{
                   fontSize: fontSizes.s4,
                   borderBottomColor: colors.placeHoder,
-                  borderBottomWidth: 2,
+                  borderBottomWidth: 1,
                 }}></TextInput>
-              <Text style={{
-                color: 'red',
-                marginTop: 5,
-                fontSize: fontSizes.s6,
-              }}>
+              <Text
+                style={{
+                  color: 'red',
+                  marginTop: 5,
+                  fontSize: fontSizes.s6,
+                }}>
                 {errorEmail}
               </Text>
             </View>
@@ -122,34 +124,39 @@ function Register(props){
                 Username
               </Text>
               <TextInput
-                onChangeText={(username)=>{
-                    if(isValidUsername(username) == true){
-                        setErrorUsername('')
-                    }else{
-                        if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-                            setErrorUsername ('Username can only contain letters, numbers, and underscores.');
-                        }
-                        if (username.length < 6 || username.length > 15) {
-                            setErrorUsername('Username must be 6 to 15 characters long.') ;
-                        }
-                        if (!/^[a-zA-Z]/.test(username)) {
-                            setErrorUsername('Username must start with a letter.') ;
-                        }
+                onChangeText={username => {
+                  if (isValidUsername(username) == true) {
+                    setErrorUsername('');
+                  } else {
+                    if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+                      setErrorUsername(
+                        'Username can only contain letters, numbers, and underscores.',
+                      );
                     }
-                    setUsername(username)
-                }}  
+                    if (username.length < 6 || username.length > 15) {
+                      setErrorUsername(
+                        'Username must be 6 to 15 characters long.',
+                      );
+                    }
+                    if (!/^[a-zA-Z]/.test(username)) {
+                      setErrorUsername('Username must start with a letter.');
+                    }
+                  }
+                  setUsername(username);
+                }}
                 placeholder="Enter your Username"
                 placeholderTextColor={colors.placeHoder}
                 style={{
                   fontSize: fontSizes.s4,
                   borderBottomColor: colors.placeHoder,
-                  borderBottomWidth: 2,
+                  borderBottomWidth: 1,
                 }}></TextInput>
-              <Text style={{
-                color: 'red',
-                marginTop: 5,
-                fontSize: fontSizes.s6,
-              }}>
+              <Text
+                style={{
+                  color: 'red',
+                  marginTop: 5,
+                  fontSize: fontSizes.s6,
+                }}>
                 {errorUsername}
               </Text>
             </View>
@@ -164,27 +171,37 @@ function Register(props){
                 Password
               </Text>
               <TextInput
-                onChangeText={(password)=> {
-                  if(isValidPassword(password) == true){
-                    setErrorPassword('')
-                  }else{
+                onChangeText={password => {
+                  if (isValidPassword(password) == true) {
+                    setErrorPassword('');
+                  } else {
                     if (password.length < 6 || password.length > 15) {
-                      setErrorPassword('Password must be 6 to 15 characters long.') ;
+                      setErrorPassword(
+                        'Password must be 6 to 15 characters long.',
+                      );
                     }
                     if (!/[@.#$!%*?&]/.test(password)) {
-                      setErrorPassword ('Password must contain at least one special character (@.#$!%*?&).');
+                      setErrorPassword(
+                        'Password must contain at least one special character (@.#$!%*?&).',
+                      );
                     }
                     if (!/\d/.test(password)) {
-                      setErrorPassword ('Password must contain at least one number.');
+                      setErrorPassword(
+                        'Password must contain at least one number.',
+                      );
                     }
                     if (!/[a-z]/.test(password)) {
-                      setErrorPassword ('Password must contain at least one lowercase letter.');
+                      setErrorPassword(
+                        'Password must contain at least one lowercase letter.',
+                      );
                     }
                     if (!/[A-Z]/.test(password)) {
-                      setErrorPassword ('Password must contain at least one uppercase letter.');
+                      setErrorPassword(
+                        'Password must contain at least one uppercase letter.',
+                      );
                     }
                   }
-                  setPassword(password)
+                  setPassword(password);
                 }}
                 secureTextEntry={true}
                 placeholder="Enter your password"
@@ -192,13 +209,14 @@ function Register(props){
                 style={{
                   fontSize: fontSizes.s4,
                   borderBottomColor: colors.placeHoder,
-                  borderBottomWidth: 2,
+                  borderBottomWidth: 1,
                 }}></TextInput>
-              <Text style={{
-                color: 'red',
-                marginTop: 5,
-                fontSize: fontSizes.s6,
-              }}>
+              <Text
+                style={{
+                  color: 'red',
+                  marginTop: 5,
+                  fontSize: fontSizes.s6,
+                }}>
                 {errorPassword}
               </Text>
             </View>
@@ -213,13 +231,15 @@ function Register(props){
                 Confirm password
               </Text>
               <TextInput
-                onChangeText={(confirm)=> {
-                  if(isValidConfirm(password, confirm) == true){
-                    setErrorConfirm('')
-                  }else{
-                    setErrorConfirm('Password and confirm password do not match.')
+                onChangeText={confirm => {
+                  if (isValidConfirm(password, confirm) == true) {
+                    setErrorConfirm('');
+                  } else {
+                    setErrorConfirm(
+                      'Password and confirm password do not match.',
+                    );
                   }
-                  setConfirm(confirm)
+                  setConfirm(confirm);
                 }}
                 secureTextEntry={true}
                 placeholder="Confirm your password"
@@ -227,30 +247,34 @@ function Register(props){
                 style={{
                   fontSize: fontSizes.s4,
                   borderBottomColor: colors.placeHoder,
-                  borderBottomWidth: 2,
+                  borderBottomWidth: 1,
                 }}></TextInput>
-              <Text style={{
-                color: 'red',
-                marginTop: 5,
-                fontSize: fontSizes.s6,
-              }}>
+              <Text
+                style={{
+                  color: 'red',
+                  marginTop: 5,
+                  fontSize: fontSizes.s6,
+                }}>
                 {errorConfirm}
               </Text>
             </View>
           </View>
           <View
             style={{
-              marginTop: 50,
+              marginTop: 30,
               justifyContent: 'center',
               alignItems: 'center',
             }}>
             <TouchableOpacity
-              disabled = {isValidationOK() == false}
+              disabled={isValidationOK() == false}
               onPress={() => {
                 alert(`email = ${email}, password = ${password}`);
               }}
               style={{
-                backgroundColor: isValidationOK() == false? colors.placeHoder : colors.primary,
+                backgroundColor:
+                  isValidationOK() == false
+                    ? colors.placeHoder
+                    : colors.primary,
                 width: 230,
                 height: 45,
                 borderRadius: 15,
@@ -266,10 +290,27 @@ function Register(props){
                 Register
               </Text>
             </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                alert('Login');
+              }}
+              style={{
+                padding: 10,
+              }}>
+              <Text
+                style={{
+                  color: colors.primary,
+                  fontSize: fontSizes.s5,
+                  fontWeight: '500',
+                }}>
+                Already have an account? Login now
+              </Text>
+            </TouchableOpacity>
           </View>
-          <View style={{
-            marginTop: 50
-          }}>
+          <View
+            style={{
+              marginTop: 30,
+            }}>
             <View
               style={{
                 flexDirection: 'row',
@@ -280,27 +321,28 @@ function Register(props){
               <View
                 style={{
                   height: 1,
-                  backgroundColor: 'black',
+                  backgroundColor: colors.text,
                   flex: 1,
                 }}></View>
               <Text
                 style={{
                   marginHorizontal: 10,
-                  fontSize: fontSizes.s4
+                  fontSize: fontSizes.s4,
                 }}>
                 Use other methods
               </Text>
               <View
                 style={{
                   height: 1,
-                  backgroundColor: 'black',
+                  backgroundColor: colors.text,
                   flex: 1,
                 }}></View>
             </View>
-            <View style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              marginTop: 10
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                marginTop: 10,
               }}>
               <View
                 style={{
@@ -310,7 +352,7 @@ function Register(props){
                   alignItems: 'center',
                   justifyContent: 'center',
                   borderRadius: 8,
-                  marginHorizontal: 5
+                  marginHorizontal: 5,
                 }}>
                 <Icon name="facebook" size={25} color="white" />
               </View>
@@ -322,7 +364,7 @@ function Register(props){
                   alignItems: 'center',
                   justifyContent: 'center',
                   borderRadius: 8,
-                  marginHorizontal: 5
+                  marginHorizontal: 5,
                 }}>
                 <Icon name="google" size={25} color="white" />
               </View>
